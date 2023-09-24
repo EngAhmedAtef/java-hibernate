@@ -1,6 +1,6 @@
 package postgres.models;
 
-import postgres.enums.Gender;
+import enums.Gender;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

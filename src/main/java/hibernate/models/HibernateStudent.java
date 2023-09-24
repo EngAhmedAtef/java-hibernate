@@ -1,7 +1,9 @@
 package hibernate.models;
 
+import enums.Gender;
 import jakarta.persistence.*;
-import postgres.enums.Gender;
+
+import java.util.UUID;
 
 @Entity
 @Table(name = "students")
@@ -9,7 +11,7 @@ public class HibernateStudent {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
-    private String id;
+    private UUID id;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
@@ -27,6 +29,20 @@ public class HibernateStudent {
     private String nationalId;
 
     public HibernateStudent() {
+    }
+
+    public HibernateStudent(String firstName, String lastName, int age, Gender gender, String email, String phoneNumber, String nationalId) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.gender = gender;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.nationalId = nationalId;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override

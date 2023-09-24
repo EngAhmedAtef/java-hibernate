@@ -1,5 +1,8 @@
+import enums.Gender;
 import hibernate.models.HibernateInstructor;
+import hibernate.models.HibernateStudent;
 import hibernate.repositories.HibernateInstructorRepo;
+import hibernate.repositories.HibernateStudentRepo;
 import postgres.data.DatabaseManager;
 import postgres.models.Course;
 import postgres.models.Instructor;
@@ -12,6 +15,7 @@ import postgres.repository.StudentsRepo;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.UUID;
 
 public class TestDrive {
     public static void main(String[] args) {
@@ -25,7 +29,9 @@ public class TestDrive {
         Connection dbConnection = dbManager.getConnection();
 
         try {
-            executeHibernateInstructorCRUDOperations();
+//            executeHibernateInstructorCRUDOperations();
+//            executeHibernateStudentCRUDOperations();
+
 //            executeInstructorCRUDOperations(dbConnection);
 //            executeStudentCRUDOperations(dbConnection);
 //            executeCourseCRUDOperations(dbConnection);
@@ -38,6 +44,19 @@ public class TestDrive {
         } catch (SQLException e) {
             System.out.println("An exception occurred.\nError: " + e.getLocalizedMessage());
         }
+    }
+
+    private static void executeHibernateStudentCRUDOperations() {
+        HibernateStudentRepo hibernateStudentRepo = new HibernateStudentRepo();
+//        hibernateStudentRepo.selectAll();
+
+//        HibernateStudent student =
+//                new HibernateStudent("Ahmed", "Atef", 24, Gender.Male, "ahmed@gmail.com", "01090275978", "EG1234567689");
+//        hibernateStudentRepo.insert(student);
+//        HibernateStudent student = hibernateStudentRepo.getById(UUID.fromString("a5fabb6d-0162-4fd2-9941-b572ce0518cc"));
+//        hibernateStudentRepo.updateEmail(student);
+//        hibernateStudentRepo.delete(student);
+//        hibernateStudentRepo.selectAll();
     }
 
     private static void executeHibernateInstructorCRUDOperations() {

@@ -1,6 +1,7 @@
 package postgres.models;
 
-import postgres.enums.CourseLevel;
+
+import enums.CourseLevel;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
