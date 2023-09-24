@@ -1,5 +1,6 @@
 package hibernate.util;
 
+import hibernate.models.HibernateCourse;
 import hibernate.models.HibernateInstructor;
 import hibernate.models.HibernateStudent;
 import org.hibernate.SessionFactory;
@@ -15,6 +16,7 @@ public abstract class HibernateUtil {
             Configuration config = new Configuration();
             config.addAnnotatedClass(HibernateInstructor.class);
             config.addAnnotatedClass(HibernateStudent.class);
+            config.addAnnotatedClass(HibernateCourse.class);
 
             StandardServiceRegistry registry = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).build();
             sessionFactory = config.buildSessionFactory(registry);

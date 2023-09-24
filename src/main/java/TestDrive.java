@@ -1,6 +1,7 @@
 import enums.Gender;
 import hibernate.models.HibernateInstructor;
 import hibernate.models.HibernateStudent;
+import hibernate.repositories.HibernateCourseRepo;
 import hibernate.repositories.HibernateInstructorRepo;
 import hibernate.repositories.HibernateStudentRepo;
 import postgres.data.DatabaseManager;
@@ -31,6 +32,7 @@ public class TestDrive {
         try {
 //            executeHibernateInstructorCRUDOperations();
 //            executeHibernateStudentCRUDOperations();
+            executeHibernateCourseCRUDOperations();
 
 //            executeInstructorCRUDOperations(dbConnection);
 //            executeStudentCRUDOperations(dbConnection);
@@ -46,6 +48,10 @@ public class TestDrive {
         }
     }
 
+    private static void executeHibernateCourseCRUDOperations() {
+        HibernateCourseRepo hibernateCourseRepo = new HibernateCourseRepo();
+        hibernateCourseRepo.selectAll();
+    }
     private static void executeHibernateStudentCRUDOperations() {
         HibernateStudentRepo hibernateStudentRepo = new HibernateStudentRepo();
 //        hibernateStudentRepo.selectAll();
@@ -66,7 +72,8 @@ public class TestDrive {
 //                new HibernateInstructor("Ahmed", "Atef", "ahmed@gmail.com", "01090275978", "Software Developer");
 //        hibernateInstructorRepository.insert(instructor);
         hibernateInstructorRepository.selectAll();
-//        HibernateInstructor instructor = hibernateInstructorRepository.getById(23);
+//        HibernateInstructor instructor = hibernateInstructorRepository.getById(1);
+//        System.out.println(instructor);
 //        hibernateInstructorRepository.updateEmail(instructor);
 //        System.out.println(instructor);
 //        hibernateInstructorRepository.delete(instructor);
