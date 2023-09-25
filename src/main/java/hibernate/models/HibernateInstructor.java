@@ -21,17 +21,20 @@ public class HibernateInstructor {
     private String title;
     @OneToMany(mappedBy = "instructor", fetch = FetchType.EAGER)
     private List<HibernateCourse> courses;
+    @OneToOne(mappedBy = "instructor")
+    private HibernateInstructorDetails details;
 
     public HibernateInstructor() {
     }
 
-    public HibernateInstructor(String firstName, String lastName, String email, String phoneNumber, String title, List<HibernateCourse> courses) {
+    public HibernateInstructor(String firstName, String lastName, String email, String phoneNumber, String title, List<HibernateCourse> courses, HibernateInstructorDetails details) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.title = title;
         this.courses = courses;
+        this.details = details;
     }
 
     public void setEmail(String email) {
@@ -49,6 +52,8 @@ public class HibernateInstructor {
                 .append(", title='").append(title);
 //        if (courses != null)
 //            stringBuilder.append(", courses=").append(courses);
+        if (details != null)
+            stringBuilder.append(", details=").append(details);
         stringBuilder.append('}');
         return stringBuilder.toString();
     }

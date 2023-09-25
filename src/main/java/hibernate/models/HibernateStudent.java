@@ -56,15 +56,18 @@ public class HibernateStudent {
 
     @Override
     public String toString() {
-        return "HibernateStudent{" +
-                "id='" + id + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", age=" + age +
-                ", gender=" + gender +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", nationalId='" + nationalId + '\'' +
-                '}';
+        StringBuilder stringBuilder = new StringBuilder("HibernateStudent{");
+        stringBuilder.append("id='").append(id)
+                .append(", firstName='").append(firstName)
+                .append(", lastName='").append(lastName)
+                .append(", age=").append(age)
+                .append(", gender=").append(gender)
+                .append(", email='").append(email)
+                .append(", phoneNumber='").append(phoneNumber)
+                .append(", nationalId='").append(nationalId);
+        if (courses != null)
+            stringBuilder.append(", courses='").append(courses);
+        stringBuilder.append('}');
+        return stringBuilder.toString();
     }
 }

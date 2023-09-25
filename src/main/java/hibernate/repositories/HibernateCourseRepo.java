@@ -9,30 +9,30 @@ import java.util.List;
 public class HibernateCourseRepo {
 
     public List<HibernateCourse> selectAll() {
-        List<HibernateCourse> Courses;
+        List<HibernateCourse> courses;
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
-            Courses = session.createQuery("SELECT i FROM HibernateCourse i", HibernateCourse.class).list();
-            Courses.forEach(System.out::println);
+            courses = session.createQuery("SELECT i FROM HibernateCourse i", HibernateCourse.class).list();
+            courses.forEach(System.out::println);
             session.getTransaction().commit();
         }
 
-        return Courses;
+        return courses;
     }
 
-    public void insert(HibernateCourse Course) {
+    public void insert(HibernateCourse course) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
-            session.persist(Course);
+            session.persist(course);
             session.getTransaction().commit();
         }
     }
 
-    public void delete(HibernateCourse Course) {
+    public void delete(HibernateCourse course) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
-            session.remove(Course);
+            session.remove(course);
             session.getTransaction().commit();
         }
     }
@@ -47,11 +47,11 @@ public class HibernateCourseRepo {
         return Course;
     }
 
-    public void updateEmail(HibernateCourse Course) {
+    public void updateEmail(HibernateCourse course) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
-            Course.setName("Changed Course Name");
-            session.update(Course);
+            course.setName("Changed Course Name");
+            session.update(course);
             session.getTransaction().commit();
         }
     }

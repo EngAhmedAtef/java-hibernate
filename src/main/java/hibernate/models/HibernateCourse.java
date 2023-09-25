@@ -57,6 +57,8 @@ public class HibernateCourse {
                 .append(", isStarted=").append(isStarted);
 //        if (instructor != null)
 //            stringBuilder.append(", instructor=").append(instructor);
+//        if (students != null)
+//            stringBuilder.append(", students=").append(students);
         stringBuilder.append('}');
         return stringBuilder.toString();
     }

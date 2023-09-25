@@ -1,7 +1,9 @@
 import enums.Gender;
 import hibernate.models.HibernateInstructor;
+import hibernate.models.HibernateInstructorDetails;
 import hibernate.models.HibernateStudent;
 import hibernate.repositories.HibernateCourseRepo;
+import hibernate.repositories.HibernateInstructorDetailsRepo;
 import hibernate.repositories.HibernateInstructorRepo;
 import hibernate.repositories.HibernateStudentRepo;
 import postgres.data.DatabaseManager;
@@ -32,7 +34,8 @@ public class TestDrive {
         try {
 //            executeHibernateInstructorCRUDOperations();
 //            executeHibernateStudentCRUDOperations();
-            executeHibernateCourseCRUDOperations();
+//            executeHibernateCourseCRUDOperations();
+//            executeHibernateInstructorDetailsCRUDOperations();
 
 //            executeInstructorCRUDOperations(dbConnection);
 //            executeStudentCRUDOperations(dbConnection);
@@ -48,13 +51,17 @@ public class TestDrive {
         }
     }
 
+    private static void executeHibernateInstructorDetailsCRUDOperations() {
+        HibernateInstructorDetailsRepo hibernateInstructorDetailsRepo = new HibernateInstructorDetailsRepo();
+        hibernateInstructorDetailsRepo.selectAll();
+    }
     private static void executeHibernateCourseCRUDOperations() {
         HibernateCourseRepo hibernateCourseRepo = new HibernateCourseRepo();
         hibernateCourseRepo.selectAll();
     }
     private static void executeHibernateStudentCRUDOperations() {
         HibernateStudentRepo hibernateStudentRepo = new HibernateStudentRepo();
-//        hibernateStudentRepo.selectAll();
+        hibernateStudentRepo.selectAll();
 
 //        HibernateStudent student =
 //                new HibernateStudent("Ahmed", "Atef", 24, Gender.Male, "ahmed@gmail.com", "01090275978", "EG1234567689");
