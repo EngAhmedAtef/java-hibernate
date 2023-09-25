@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import postgres.models.Instructor;
 
 import java.sql.Timestamp;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -28,6 +29,8 @@ public class HibernateCourse {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "instructor_id")
     private HibernateInstructor instructor;
+    @ManyToMany(mappedBy = "courses")
+    private Set<HibernateStudent> students;
 
     public HibernateCourse() {
     }

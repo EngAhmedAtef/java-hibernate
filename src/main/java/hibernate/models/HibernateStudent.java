@@ -3,6 +3,7 @@ package hibernate.models;
 import enums.Gender;
 import jakarta.persistence.*;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -27,6 +28,13 @@ public class HibernateStudent {
     private String phoneNumber;
     @Column(name = "national_id")
     private String nationalId;
+    @ManyToMany
+    @JoinTable(
+            name = "relations",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private Set<HibernateCourse> courses;
 
     public HibernateStudent() {
     }
