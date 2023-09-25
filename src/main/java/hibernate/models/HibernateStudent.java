@@ -39,7 +39,7 @@ public class HibernateStudent {
     public HibernateStudent() {
     }
 
-    public HibernateStudent(String firstName, String lastName, int age, Gender gender, String email, String phoneNumber, String nationalId) {
+    public HibernateStudent(String firstName, String lastName, int age, Gender gender, String email, String phoneNumber, String nationalId, Set<HibernateCourse> courses) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -47,6 +47,7 @@ public class HibernateStudent {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.nationalId = nationalId;
+        this.courses = courses;
     }
 
     public void setEmail(String email) {

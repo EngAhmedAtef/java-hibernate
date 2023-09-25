@@ -2,7 +2,6 @@ package hibernate.models;
 
 import enums.CourseLevel;
 import jakarta.persistence.*;
-import postgres.models.Instructor;
 
 import java.sql.Timestamp;
 import java.util.Set;
@@ -32,7 +31,17 @@ public class HibernateCourse {
     @ManyToMany(mappedBy = "courses")
     private Set<HibernateStudent> students;
 
-    public HibernateCourse() {
+    public HibernateCourse() {}
+
+    public HibernateCourse(UUID id, String name, Timestamp startDate, Timestamp endDate, CourseLevel courseLevel, Boolean isStarted, HibernateInstructor instructor, Set<HibernateStudent> students) {
+        this.id = id;
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.courseLevel = courseLevel;
+        this.isStarted = isStarted;
+        this.instructor = instructor;
+        this.students = students;
     }
 
     public void setName(String name) { this.name = name; }
