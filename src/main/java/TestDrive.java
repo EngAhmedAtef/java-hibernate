@@ -1,11 +1,8 @@
-import enums.Gender;
-import hibernate.models.HibernateInstructor;
-import hibernate.models.HibernateInstructorDetails;
-import hibernate.models.HibernateStudent;
-import hibernate.repositories.HibernateCourseRepo;
-import hibernate.repositories.HibernateInstructorDetailsRepo;
-import hibernate.repositories.HibernateInstructorRepo;
-import hibernate.repositories.HibernateStudentRepo;
+import hibernate.entities.HibernateCourse;
+import hibernate.entities.HibernateInstructor;
+import hibernate.entities.HibernateInstructorDetails;
+import hibernate.entities.HibernateStudent;
+import hibernate.repositories.*;
 import postgres.data.DatabaseManager;
 import postgres.models.Course;
 import postgres.models.Instructor;
@@ -18,7 +15,6 @@ import postgres.repository.StudentsRepo;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.UUID;
 
 public class TestDrive {
     public static void main(String[] args) {
@@ -36,6 +32,7 @@ public class TestDrive {
 //            executeHibernateStudentCRUDOperations();
 //            executeHibernateCourseCRUDOperations();
 //            executeHibernateInstructorDetailsCRUDOperations();
+            executeHibernateJoinsCRUDOperations();
 
 //            executeInstructorCRUDOperations(dbConnection);
 //            executeStudentCRUDOperations(dbConnection);
@@ -51,40 +48,28 @@ public class TestDrive {
         }
     }
 
+    private static void executeHibernateJoinsCRUDOperations() {
+        HibernateJoinsRepo.getInstructorsAndCourses();
+    }
     private static void executeHibernateInstructorDetailsCRUDOperations() {
-        HibernateInstructorDetailsRepo hibernateInstructorDetailsRepo = new HibernateInstructorDetailsRepo();
-        hibernateInstructorDetailsRepo.selectAll();
+        List<HibernateInstructorDetails> details = HibernateInstructorDetailsRepo.selectAll();
+        details.forEach(System.out::println);
     }
     private static void executeHibernateCourseCRUDOperations() {
-        HibernateCourseRepo hibernateCourseRepo = new HibernateCourseRepo();
-        hibernateCourseRepo.selectAll();
+        List<HibernateCourse> courses = HibernateCourseRepo.selectAll();
+        courses.forEach(System.out::println);
+//        HibernateInstructor instructor = new HibernateInstructor("Ahmed", "Atef", "ahmed@gmail.com", "12345", "My Title", null, null);
+//        HibernateCourse course = new HibernateCourse("My Course", Timestamp.valueOf("2023-06-01 12:00:00"), Timestamp.valueOf("2023-06-01 12:00:00"), CourseLevel.Advanced, false, instructor, null);
+//        HibernateCourseRepo.insert(course);
     }
     private static void executeHibernateStudentCRUDOperations() {
-        HibernateStudentRepo hibernateStudentRepo = new HibernateStudentRepo();
-        hibernateStudentRepo.selectAll();
-
-//        HibernateStudent student =
-//                new HibernateStudent("Ahmed", "Atef", 24, Gender.Male, "ahmed@gmail.com", "01090275978", "EG1234567689");
-//        hibernateStudentRepo.insert(student);
-//        HibernateStudent student = hibernateStudentRepo.getById(UUID.fromString("a5fabb6d-0162-4fd2-9941-b572ce0518cc"));
-//        hibernateStudentRepo.updateEmail(student);
-//        hibernateStudentRepo.delete(student);
-//        hibernateStudentRepo.selectAll();
+        List<HibernateStudent> students = HibernateStudentRepo.selectAll();
+        students.forEach(System.out::println);
     }
 
     private static void executeHibernateInstructorCRUDOperations() {
-        HibernateInstructorRepo hibernateInstructorRepository = new HibernateInstructorRepo();
-
-//        HibernateInstructor instructor =
-//                new HibernateInstructor("Ahmed", "Atef", "ahmed@gmail.com", "01090275978", "Software Developer");
-//        hibernateInstructorRepository.insert(instructor);
-        hibernateInstructorRepository.selectAll();
-//        HibernateInstructor instructor = hibernateInstructorRepository.getById(1);
-//        System.out.println(instructor);
-//        hibernateInstructorRepository.updateEmail(instructor);
-//        System.out.println(instructor);
-//        hibernateInstructorRepository.delete(instructor);
-//        hibernateInstructorRepository.selectAll();
+        List<HibernateInstructor> instructors = HibernateInstructorRepo.selectAll();
+        instructors.forEach(System.out::println);
     }
 
     public static void executeInstructorCRUDOperations(Connection dbConnection) throws SQLException {

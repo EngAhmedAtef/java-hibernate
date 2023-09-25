@@ -1,9 +1,9 @@
 package hibernate.util;
 
-import hibernate.models.HibernateCourse;
-import hibernate.models.HibernateInstructor;
-import hibernate.models.HibernateInstructorDetails;
-import hibernate.models.HibernateStudent;
+import hibernate.entities.HibernateCourse;
+import hibernate.entities.HibernateInstructor;
+import hibernate.entities.HibernateInstructorDetails;
+import hibernate.entities.HibernateStudent;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;

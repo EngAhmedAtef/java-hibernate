@@ -1,6 +1,6 @@
 package hibernate.repositories;
 
-import hibernate.models.HibernateCourse;
+import hibernate.entities.HibernateCourse;
 import hibernate.util.HibernateUtil;
 import org.hibernate.Session;
 
@@ -8,20 +8,20 @@ import java.util.List;
 
 public class HibernateCourseRepo {
 
-    public List<HibernateCourse> selectAll() {
+    public static List<HibernateCourse> selectAll() {
         List<HibernateCourse> courses;
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
             courses = session.createQuery("SELECT i FROM HibernateCourse i", HibernateCourse.class).list();
-            courses.forEach(System.out::println);
+//            courses.forEach(System.out::println);
             session.getTransaction().commit();
         }
 
         return courses;
     }
 
-    public void insert(HibernateCourse course) {
+    public static void insert(HibernateCourse course) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
             session.persist(course);
@@ -29,7 +29,7 @@ public class HibernateCourseRepo {
         }
     }
 
-    public void delete(HibernateCourse course) {
+    public static void delete(HibernateCourse course) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
             session.remove(course);
@@ -37,7 +37,7 @@ public class HibernateCourseRepo {
         }
     }
 
-    public HibernateCourse getById(int id) {
+    public static HibernateCourse getById(int id) {
         HibernateCourse Course;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
@@ -47,7 +47,7 @@ public class HibernateCourseRepo {
         return Course;
     }
 
-    public void updateEmail(HibernateCourse course) {
+    public static void updateEmail(HibernateCourse course) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
             course.setName("Changed Course Name");

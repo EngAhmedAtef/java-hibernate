@@ -1,4 +1,4 @@
-package hibernate.models;
+package hibernate.entities;
 
 import jakarta.persistence.*;
 
@@ -21,8 +21,7 @@ public class HibernateInstructorDetails {
     private HibernateInstructor instructor;
 
     public HibernateInstructorDetails() {}
-    public HibernateInstructorDetails(UUID id, String youtubeChannel, String[] hobbies, HibernateInstructor instructor) {
-        this.id = id;
+    public HibernateInstructorDetails(String youtubeChannel, String[] hobbies, HibernateInstructor instructor) {
         this.youtubeChannel = youtubeChannel;
         this.hobbies = hobbies;
         this.instructor = instructor;

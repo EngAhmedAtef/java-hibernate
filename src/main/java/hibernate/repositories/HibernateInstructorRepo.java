@@ -1,6 +1,6 @@
 package hibernate.repositories;
 
-import hibernate.models.HibernateInstructor;
+import hibernate.entities.HibernateInstructor;
 import hibernate.util.HibernateUtil;
 import org.hibernate.Session;
 
@@ -8,20 +8,20 @@ import java.util.List;
 
 public class HibernateInstructorRepo {
 
-    public List<HibernateInstructor> selectAll() {
+    public static List<HibernateInstructor> selectAll() {
         List<HibernateInstructor> instructors;
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
             instructors = session.createQuery("SELECT i FROM HibernateInstructor i", HibernateInstructor.class).list();
-            instructors.forEach(System.out::println);
+//            instructors.forEach(System.out::println);
             session.getTransaction().commit();
         }
 
         return instructors;
     }
 
-    public void insert(HibernateInstructor instructor) {
+    public static void insert(HibernateInstructor instructor) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
             session.persist(instructor);
@@ -29,7 +29,7 @@ public class HibernateInstructorRepo {
         }
     }
 
-    public void delete(HibernateInstructor instructor) {
+    public static void delete(HibernateInstructor instructor) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
             session.remove(instructor);
@@ -37,7 +37,7 @@ public class HibernateInstructorRepo {
         }
     }
 
-    public HibernateInstructor getById(int id) {
+    public static HibernateInstructor getById(int id) {
         HibernateInstructor instructor;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
@@ -47,7 +47,7 @@ public class HibernateInstructorRepo {
         return instructor;
     }
 
-    public void updateEmail(HibernateInstructor instructor) {
+    public static void updateEmail(HibernateInstructor instructor) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
             instructor.setEmail("ahmed@gizasystems.com");

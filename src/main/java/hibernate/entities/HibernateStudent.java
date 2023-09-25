@@ -1,4 +1,4 @@
-package hibernate.models;
+package hibernate.entities;
 
 import enums.Gender;
 import jakarta.persistence.*;

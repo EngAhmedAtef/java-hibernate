@@ -1,4 +1,4 @@
-package hibernate.models;
+package hibernate.entities;
 
 import jakarta.persistence.*;
 
@@ -37,6 +37,14 @@ public class HibernateInstructor {
         this.details = details;
     }
 
+    public String getFirstName() { return firstName; }
+    public String getLastName() { return lastName; }
+    public String getEmail() { return email; }
+    public String getPhoneNumber() { return phoneNumber; }
+    public String getTitle() { return title; }
+    public List<HibernateCourse> getCourses() { return courses; }
+    public HibernateInstructorDetails getDetails() { return details; }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -52,8 +60,8 @@ public class HibernateInstructor {
                 .append(", title='").append(title);
 //        if (courses != null)
 //            stringBuilder.append(", courses=").append(courses);
-        if (details != null)
-            stringBuilder.append(", details=").append(details);
+//        if (details != null)
+//            stringBuilder.append(", details=").append(details);
         stringBuilder.append('}');
         return stringBuilder.toString();
     }

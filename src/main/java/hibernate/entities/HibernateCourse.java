@@ -1,4 +1,4 @@
-package hibernate.models;
+package hibernate.entities;
 
 import enums.CourseLevel;
 import jakarta.persistence.*;
@@ -25,7 +25,7 @@ public class HibernateCourse {
     private CourseLevel courseLevel;
     @Column(name = "is_started")
     private Boolean isStarted;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "instructor_id")
     private HibernateInstructor instructor;
     @ManyToMany(mappedBy = "courses")
@@ -33,8 +33,7 @@ public class HibernateCourse {
 
     public HibernateCourse() {}
 
-    public HibernateCourse(UUID id, String name, Timestamp startDate, Timestamp endDate, CourseLevel courseLevel, Boolean isStarted, HibernateInstructor instructor, Set<HibernateStudent> students) {
-        this.id = id;
+    public HibernateCourse(String name, Timestamp startDate, Timestamp endDate, CourseLevel courseLevel, Boolean isStarted, HibernateInstructor instructor, Set<HibernateStudent> students) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -43,6 +42,8 @@ public class HibernateCourse {
         this.instructor = instructor;
         this.students = students;
     }
+
+    public String getName() { return name; }
 
     public void setName(String name) { this.name = name; }
 
