@@ -59,7 +59,7 @@ public class CourseRepo {
     public static Course getByName(String name) {
         Course course;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query query = session.createQuery("FROM Course c WHERE c.name = :name");
+            Query query = session.createQuery("FROM Course c WHERE c.name ILIKE :name");
             query.setParameter("name", name);
             course = (Course) query.getSingleResult();
         }

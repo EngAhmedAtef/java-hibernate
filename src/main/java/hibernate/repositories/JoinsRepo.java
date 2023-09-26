@@ -4,6 +4,7 @@ import hibernate.dtos.InstructorNameCoursesNamesDTO;
 import hibernate.entities.Course;
 import hibernate.entities.Instructor;
 import hibernate.util.HibernateUtil;
+import jakarta.persistence.Query;
 import org.hibernate.Session;
 
 import java.sql.Connection;
@@ -17,25 +18,11 @@ public class JoinsRepo {
     public static List<InstructorNameCoursesNamesDTO> getInstructorsAndCourses() {
         List<InstructorNameCoursesNamesDTO> instructorNamesCoursesNames;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            session.beginTransaction();
-            instructorNamesCoursesNames = session.createQuery("SELECT CONCAT(i.firstName, ' ', i.lastName), i.courses FROM Instructor i", InstructorNameCoursesNamesDTO.class).list();
-            session.getTransaction().commit();
+            Query query = session.createQuery("FROM Instructor i");
+            List result = query.getResultList();
         }
 
-        return instructorNamesCoursesNames;
-//        List<Instructor> instructors = InstructorRepo.selectAll();
-//        StringBuilder result = new StringBuilder();
-//        for (Instructor instructor : instructors) {
-//            result.append("Instructor: ").append(instructor.getFirstName()).append(" ").append(instructor.getLastName()).append(", Courses: ");
-//            List<Course> courses = instructor.getCourses();
-//            for (int i = 0; i < courses.size(); i++) {
-//                result.append(courses.get(i).getName());
-//                if (i < courses.size() - 1)
-//                    result.append(", ");
-//            }
-//            result.append("\n");
-//        }
-//        System.out.println(result);
+        return null;
     }
 
     public static void getInstructorsCoursesStudents(Connection dbConnection) throws SQLException {

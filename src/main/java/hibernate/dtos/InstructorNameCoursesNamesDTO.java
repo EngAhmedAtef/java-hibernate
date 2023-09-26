@@ -2,24 +2,19 @@ package hibernate.dtos;
 
 import hibernate.entities.Course;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class InstructorNameCoursesNamesDTO {
     private String instructorName;
-    private List<Course> courseNames = new ArrayList<>();
+    private List<String> courseNames;
+    private List<Course> courses;
 
-    public InstructorNameCoursesNamesDTO(String instructorName, List<Course> courseNames) {
+    public InstructorNameCoursesNamesDTO(String instructorName, List<Course> courses) {
         this.instructorName = instructorName;
-        this.courseNames = courseNames;
+        this.courses = courses;
     }
 
-    public InstructorNameCoursesNamesDTO(String instructorName, Course course) {
-        this.instructorName = instructorName;
-        courseNames.add(course);
-    }
-
-    public List<Course> getCourseNames() {
+    public List<String> getCourseNames() {
         return courseNames;
     }
 
