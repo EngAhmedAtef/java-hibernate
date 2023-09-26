@@ -1,61 +1,26 @@
-import enums.CourseLevel;
-import hibernate.dtos.InstructorNameCoursesNamesDTO;
-import hibernate.entities.*;
-import hibernate.repositories.*;
+import hibernate.entities.Instructor;
+import hibernate.entities.InstructorDetails;
+import hibernate.entities.Student;
+import hibernate.repositories.InstructorDetailsRepo;
+import hibernate.repositories.InstructorRepo;
+import hibernate.repositories.StudentRepo;
 import hibernate.util.HibernateUtil;
-//import postgres.data.DatabaseManager;
-//import postgres.repository.CRUDRepository;
-//import postgres.repository.CoursesRepo;
-//import postgres.repository.InstructorsRepo;
-//import postgres.repository.StudentsRepo;
 
-//import java.sql.Connection;
-//import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 public class TestDrive {
     public static void main(String[] args) {
-//        String databaseName = "center_management";
-//        String password = "12345";
-//
-//        DatabaseManager dbManager = new DatabaseManager()
-//                .databaseName(databaseName)
-//                .password(password);
-//
-//        Connection dbConnection = dbManager.getConnection();
-//
-//        try {
-//
-
-//            executeInstructorCRUDOperations(dbConnection);
-//            executeStudentCRUDOperations(dbConnection);
-//            executeCourseCRUDOperations(dbConnection);
-//            getInstructorsAndCourses(dbConnection);
-//            getInstructorsCoursesStudents(dbConnection);
-//            getCourseNameStartDateStudents(dbConnection);
-//            getIntermediateCoursesStudents(dbConnection);
-
-//            dbConnection.close();
-//        } catch (SQLException e) {
-//            System.out.println("An exception occurred.\nError: " + e.getLocalizedMessage());
-//        }
 
 //        executeHibernateInstructorCRUDOperations();
 //        executeHibernateStudentCRUDOperations();
 //        executeHibernateCourseCRUDOperations();
 //        executeHibernateInstructorDetailsCRUDOperations();
-        executeHibernateJoinsCRUDOperations();
+//        executeHibernateJoinsCRUDOperations();
 
         HibernateUtil.getSessionFactory().close();
     }
 
     private static void executeHibernateJoinsCRUDOperations() {
-
-        List<InstructorNameCoursesNamesDTO> instructorNameCoursesNames = JoinsRepo.getInstructorsAndCourses();
-        instructorNameCoursesNames.forEach(System.out::println);
     }
 
     private static void executeHibernateInstructorDetailsCRUDOperations() {
@@ -103,64 +68,4 @@ public class TestDrive {
         List<Instructor> instructors = InstructorRepo.selectAll();
         instructors.forEach(System.out::println);
     }
-
-//    public static void executeInstructorCRUDOperations(Connection dbConnection) throws SQLException {
-//        CRUDRepository instructorRepository = new InstructorsRepo();
-//
-//        // INSERT QUERY
-//        int result = instructorRepository.insertAll(dbConnection);
-//        System.out.println("Inserted " + result + " rows in instructor.");
-//
-//        // UPDATE QUERY
-//        result = instructorRepository.updateAll(dbConnection);
-//        System.out.println("Updated " + result + " rows in instructor.");
-////
-////        // SELECT QUERY
-//        List<postgres.models.Instructor> instructors = (List<postgres.models.Instructor>) instructorRepository.selectAll(dbConnection);
-//        instructors.forEach(System.out::println);
-////
-////        // DELETE QUERY
-//        result = instructorRepository.deleteAll(dbConnection);
-//        System.out.println("Deleted " + result + " rows from instructor.");
-//    }
-//
-//    public static void executeStudentCRUDOperations(Connection dbConnection) throws SQLException {
-//        CRUDRepository studentRepository = new StudentsRepo();
-//
-//        // INSERT QUERY
-//        int result = studentRepository.insertAll(dbConnection);
-//        System.out.println("Inserted " + result + " rows in students.");
-//
-//        // UPDATE QUERY
-//        result = studentRepository.updateAll(dbConnection);
-//        System.out.println("Updated " + result + " rows in students.");
-////
-////        // SELECT QUERY
-//        List<postgres.models.Student> students = (List<postgres.models.Student>) studentRepository.selectAll(dbConnection);
-//        students.forEach(System.out::println);
-////
-////        // DELETE QUERY
-//        result = studentRepository.deleteAll(dbConnection);
-//        System.out.println("Deleted " + result + " rows from students.");
-//    }
-//
-//    public static void executeCourseCRUDOperations(Connection dbConnection) throws SQLException {
-//        CRUDRepository courseRepository = new CoursesRepo();
-//
-//        // INSERT QUERY
-//        int result = courseRepository.insertAll(dbConnection);
-//        System.out.println("Inserted " + result + " rows in courses.");
-//
-//        // UPDATE QUERY
-//        result = courseRepository.updateAll(dbConnection);
-//        System.out.println("Updated " + result + " rows in courses.");
-////
-////        // SELECT QUERY
-//        List<postgres.models.Course> courses = (List<postgres.models.Course>) courseRepository.selectAll(dbConnection);
-//        courses.forEach(System.out::println);
-////
-////        // DELETE QUERY
-//        result = courseRepository.deleteAll(dbConnection);
-//        System.out.println("Deleted " + result + " rows from courses.");
-//    }
 }

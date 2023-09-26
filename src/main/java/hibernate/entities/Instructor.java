@@ -1,5 +1,6 @@
 package hibernate.entities;
 
+import hibernate.dtos.InstructorDTO;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -24,19 +25,20 @@ public class Instructor {
     @OneToOne(mappedBy = "instructor")
     private InstructorDetails details;
 
-    public Instructor() {
+    public Instructor() {}
+
+    public Instructor(InstructorDTO dto) {
+        id = dto.getId();
+        firstName = dto.getFirstName();
+        lastName = dto.getLastName();
+        email = dto.getEmail();
+        phoneNumber = dto.getPhoneNumber();
+        title = dto.getTitle();
+        courses = dto.getCourses();
+        details = dto.getDetails();
     }
 
-    public Instructor(String firstName, String lastName, String email, String phoneNumber, String title, List<Course> courses, InstructorDetails details) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.title = title;
-        this.courses = courses;
-        this.details = details;
-    }
-
+    public int getId() { return id; }
     public String getFirstName() { return firstName; }
     public String getLastName() { return lastName; }
     public String getEmail() { return email; }
@@ -45,24 +47,12 @@ public class Instructor {
     public List<Course> getCourses() { return courses; }
     public InstructorDetails getDetails() { return details; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder("HibernateInstructor{");
-        stringBuilder.append("id=").append(id)
-                .append(", firstName='").append(firstName)
-                .append(", lastName='").append(lastName)
-                .append(", email='").append(email)
-                .append(", phoneNumber='").append(phoneNumber)
-                .append(", title='").append(title);
-//        if (courses != null)
-//            stringBuilder.append(", courses=").append(courses);
-//        if (details != null)
-//            stringBuilder.append(", details=").append(details);
-        stringBuilder.append('}');
-        return stringBuilder.toString();
-    }
+    public void setId(int id) { this.id = id; }
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
+    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
+    public void setTitle(String title) { this.title = title; }
+    public void setCourses(List<Course> courses) { this.courses = courses; }
+    public void setDetails(InstructorDetails details) { this.details = details; }
+    public void setEmail(String email) { this.email = email; }
 }

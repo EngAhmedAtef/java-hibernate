@@ -1,8 +1,5 @@
 package hibernate.repositories;
 
-import hibernate.dtos.InstructorNameCoursesNamesDTO;
-import hibernate.entities.Course;
-import hibernate.entities.Instructor;
 import hibernate.util.HibernateUtil;
 import jakarta.persistence.Query;
 import org.hibernate.Session;

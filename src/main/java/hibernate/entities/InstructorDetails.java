@@ -1,8 +1,8 @@
 package hibernate.entities;
 
+import hibernate.dtos.InstructorDetailsDTO;
 import jakarta.persistence.*;
 
-import java.util.Arrays;
 import java.util.UUID;
 
 @Entity
@@ -21,25 +21,21 @@ public class InstructorDetails {
     private Instructor instructor;
 
     public InstructorDetails() {}
-    public InstructorDetails(String youtubeChannel, String[] hobbies, Instructor instructor) {
-        this.youtubeChannel = youtubeChannel;
-        this.hobbies = hobbies;
-        this.instructor = instructor;
+
+    public InstructorDetails(InstructorDetailsDTO dto) {
+        id = dto.getId();
+        youtubeChannel = dto.getYoutubeChannel();
+        hobbies = dto.getHobbies();
+        instructor = dto.getInstructor();
     }
 
+    public UUID getId() {  return id; }
+    public String getYoutubeChannel() { return youtubeChannel; }
+    public String[] getHobbies() { return hobbies; }
+    public Instructor getInstructor() { return instructor; }
+
+    public void setId(UUID id) { this.id = id; }
+    public void setHobbies(String[] hobbies) { this.hobbies = hobbies; }
+    public void setInstructor(Instructor instructor) { this.instructor = instructor; }
     public void setYoutubeChannel(String youtubeChannel) { this.youtubeChannel = youtubeChannel; }
-
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder("HibernateInstructorDetails{");
-        stringBuilder.append("id=").append(id)
-                .append(", youtubeChannel='")
-                .append(youtubeChannel)
-                .append(", hobbies=")
-                .append(Arrays.toString(hobbies));
-//        if (instructor != null)
-//            stringBuilder.append(", instructor=").append(instructor);
-        stringBuilder.append('}');
-        return stringBuilder.toString();
-    }
 }
