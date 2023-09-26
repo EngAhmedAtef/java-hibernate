@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "students")
-public class HibernateStudent {
+public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
@@ -34,12 +34,12 @@ public class HibernateStudent {
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id")
     )
-    private Set<HibernateCourse> courses;
+    private Set<Course> courses;
 
-    public HibernateStudent() {
+    public Student() {
     }
 
-    public HibernateStudent(String firstName, String lastName, int age, Gender gender, String email, String phoneNumber, String nationalId, Set<HibernateCourse> courses) {
+    public Student(String firstName, String lastName, int age, Gender gender, String email, String phoneNumber, String nationalId, Set<Course> courses) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;

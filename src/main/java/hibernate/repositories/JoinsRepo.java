@@ -1,7 +1,10 @@
 package hibernate.repositories;
 
-import hibernate.entities.HibernateCourse;
-import hibernate.entities.HibernateInstructor;
+import hibernate.dtos.InstructorNameCoursesNamesDTO;
+import hibernate.entities.Course;
+import hibernate.entities.Instructor;
+import hibernate.util.HibernateUtil;
+import org.hibernate.Session;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,22 +12,30 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class HibernateJoinsRepo {
+public class JoinsRepo {
 
-    public static void getInstructorsAndCourses() {
-        List<HibernateInstructor> instructors = HibernateInstructorRepo.selectAll();
-        StringBuilder result = new StringBuilder();
-        for (HibernateInstructor instructor : instructors) {
-            result.append("Instructor: ").append(instructor.getFirstName()).append(" ").append(instructor.getLastName()).append(", Courses: ");
-            List<HibernateCourse> courses = instructor.getCourses();
-            for (int i = 0; i < courses.size(); i++) {
-                result.append(courses.get(i).getName());
-                if (i < courses.size() - 1)
-                    result.append(", ");
-            }
-            result.append("\n");
+    public static List<InstructorNameCoursesNamesDTO> getInstructorsAndCourses() {
+        List<InstructorNameCoursesNamesDTO> instructorNamesCoursesNames;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            session.beginTransaction();
+            instructorNamesCoursesNames = session.createQuery("SELECT CONCAT(i.firstName, ' ', i.lastName), i.courses FROM Instructor i", InstructorNameCoursesNamesDTO.class).list();
+            session.getTransaction().commit();
         }
-        System.out.println(result);
+
+        return instructorNamesCoursesNames;
+//        List<Instructor> instructors = InstructorRepo.selectAll();
+//        StringBuilder result = new StringBuilder();
+//        for (Instructor instructor : instructors) {
+//            result.append("Instructor: ").append(instructor.getFirstName()).append(" ").append(instructor.getLastName()).append(", Courses: ");
+//            List<Course> courses = instructor.getCourses();
+//            for (int i = 0; i < courses.size(); i++) {
+//                result.append(courses.get(i).getName());
+//                if (i < courses.size() - 1)
+//                    result.append(", ");
+//            }
+//            result.append("\n");
+//        }
+//        System.out.println(result);
     }
 
     public static void getInstructorsCoursesStudents(Connection dbConnection) throws SQLException {

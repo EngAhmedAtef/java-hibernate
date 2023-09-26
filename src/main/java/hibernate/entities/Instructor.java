@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "instructor")
-public class HibernateInstructor {
+public class Instructor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -20,14 +20,14 @@ public class HibernateInstructor {
     @Column(name = "title")
     private String title;
     @OneToMany(mappedBy = "instructor", fetch = FetchType.EAGER)
-    private List<HibernateCourse> courses;
+    private List<Course> courses;
     @OneToOne(mappedBy = "instructor")
-    private HibernateInstructorDetails details;
+    private InstructorDetails details;
 
-    public HibernateInstructor() {
+    public Instructor() {
     }
 
-    public HibernateInstructor(String firstName, String lastName, String email, String phoneNumber, String title, List<HibernateCourse> courses, HibernateInstructorDetails details) {
+    public Instructor(String firstName, String lastName, String email, String phoneNumber, String title, List<Course> courses, InstructorDetails details) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -42,8 +42,8 @@ public class HibernateInstructor {
     public String getEmail() { return email; }
     public String getPhoneNumber() { return phoneNumber; }
     public String getTitle() { return title; }
-    public List<HibernateCourse> getCourses() { return courses; }
-    public HibernateInstructorDetails getDetails() { return details; }
+    public List<Course> getCourses() { return courses; }
+    public InstructorDetails getDetails() { return details; }
 
     public void setEmail(String email) {
         this.email = email;

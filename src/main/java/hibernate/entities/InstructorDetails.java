@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "instructor_details")
-public class HibernateInstructorDetails {
+public class InstructorDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
@@ -18,10 +18,10 @@ public class HibernateInstructorDetails {
     private String[] hobbies;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "instructor_id")
-    private HibernateInstructor instructor;
+    private Instructor instructor;
 
-    public HibernateInstructorDetails() {}
-    public HibernateInstructorDetails(String youtubeChannel, String[] hobbies, HibernateInstructor instructor) {
+    public InstructorDetails() {}
+    public InstructorDetails(String youtubeChannel, String[] hobbies, Instructor instructor) {
         this.youtubeChannel = youtubeChannel;
         this.hobbies = hobbies;
         this.instructor = instructor;

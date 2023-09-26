@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "courses")
-public class HibernateCourse {
+public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
@@ -25,15 +25,15 @@ public class HibernateCourse {
     private CourseLevel courseLevel;
     @Column(name = "is_started")
     private Boolean isStarted;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "instructor_id")
-    private HibernateInstructor instructor;
+    private Instructor instructor;
     @ManyToMany(mappedBy = "courses")
-    private Set<HibernateStudent> students;
+    private Set<Student> students;
 
-    public HibernateCourse() {}
+    public Course() {}
 
-    public HibernateCourse(String name, Timestamp startDate, Timestamp endDate, CourseLevel courseLevel, Boolean isStarted, HibernateInstructor instructor, Set<HibernateStudent> students) {
+    public Course(String name, Timestamp startDate, Timestamp endDate, CourseLevel courseLevel, Boolean isStarted, Instructor instructor, Set<Student> students) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;

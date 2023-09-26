@@ -1,58 +1,56 @@
 package hibernate.repositories;
 
-import hibernate.entities.HibernateStudent;
+import hibernate.entities.Instructor;
 import hibernate.util.HibernateUtil;
 import org.hibernate.Session;
 
 import java.util.List;
-import java.util.UUID;
 
-public class HibernateStudentRepo {
+public class InstructorRepo {
 
-    public static List<HibernateStudent> selectAll() {
-        List<HibernateStudent> students;
+    public static List<Instructor> selectAll() {
+        List<Instructor> instructors;
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
-            students = session.createQuery("SELECT i FROM HibernateStudent i", HibernateStudent.class).list();
-//            students.forEach(System.out::println);
+            instructors = session.createQuery("FROM Instructor", Instructor.class).list();
             session.getTransaction().commit();
         }
 
-        return students;
+        return instructors;
     }
 
-    public static void insert(HibernateStudent student) {
+    public static void insert(Instructor instructor) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
-            session.persist(student);
-            session.getTransaction().commit();
-        }
-    }
-
-    public static void delete(HibernateStudent student) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            session.beginTransaction();
-            session.remove(student);
+            session.persist(instructor);
             session.getTransaction().commit();
         }
     }
 
-    public static HibernateStudent getById(UUID id) {
-        HibernateStudent student;
+    public static void delete(Instructor instructor) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
-            student = session.get(HibernateStudent.class, id);
+            session.remove(instructor);
             session.getTransaction().commit();
         }
-        return student;
     }
 
-    public static void updateEmail(HibernateStudent student) {
+    public static Instructor getById(int id) {
+        Instructor instructor;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
-            student.setEmail("ahmed@gizasystems.com");
-            session.update(student);
+            instructor = session.get(Instructor.class, id);
+            session.getTransaction().commit();
+        }
+        return instructor;
+    }
+
+    public static void updateEmail(Instructor instructor) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            session.beginTransaction();
+            instructor.setEmail("ahmed@gizasystems.com");
+            session.update(instructor);
             session.getTransaction().commit();
         }
     }
