@@ -1,8 +1,10 @@
+import hibernate.dtos.InstructorNameCoursesNamesDTO;
 import hibernate.entities.Instructor;
 import hibernate.entities.InstructorDetails;
 import hibernate.entities.Student;
 import hibernate.repositories.InstructorDetailsRepo;
 import hibernate.repositories.InstructorRepo;
+import hibernate.repositories.JoinsRepo;
 import hibernate.repositories.StudentRepo;
 import hibernate.util.HibernateUtil;
 
@@ -15,12 +17,14 @@ public class TestDrive {
 //        executeHibernateStudentCRUDOperations();
 //        executeHibernateCourseCRUDOperations();
 //        executeHibernateInstructorDetailsCRUDOperations();
-//        executeHibernateJoinsCRUDOperations();
+        executeHibernateJoinsCRUDOperations();
 
         HibernateUtil.getSessionFactory().close();
     }
 
     private static void executeHibernateJoinsCRUDOperations() {
+        List<InstructorNameCoursesNamesDTO> result = JoinsRepo.getInstructorsAndCourses();
+        result.forEach(System.out::println);
     }
 
     private static void executeHibernateInstructorDetailsCRUDOperations() {

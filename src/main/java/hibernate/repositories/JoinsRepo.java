@@ -1,5 +1,10 @@
 package hibernate.repositories;
 
+import hibernate.dtos.InstructorNameCoursesNamesDTO;
+import hibernate.entities.Course;
+import hibernate.entities.Instructor;
+import hibernate.mapper.InstructorMapper;
+import hibernate.mapper.InstructorNameCourseNameMapper;
 import hibernate.util.HibernateUtil;
 import jakarta.persistence.Query;
 import org.hibernate.Session;
@@ -8,18 +13,23 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class JoinsRepo {
 
     public static List<InstructorNameCoursesNamesDTO> getInstructorsAndCourses() {
-        List<InstructorNameCoursesNamesDTO> instructorNamesCoursesNames;
+        List<InstructorNameCoursesNamesDTO> instructorNamesCoursesNames = new ArrayList<>();
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query query = session.createQuery("FROM Instructor i");
-            List result = query.getResultList();
+            List<Instructor> instructors = session.createQuery("FROM Instructor").getResultList();
+            if (!instructors.isEmpty()) {
+                InstructorNameCourseNameMapper mapper = new InstructorNameCourseNameMapper();
+                for (Instructor instructor : instructors)
+                    instructorNamesCoursesNames.add(mapper.mapToDTO(instructor));
+            }
         }
 
-        return null;
+        return instructorNamesCoursesNames;
     }
 
     public static void getInstructorsCoursesStudents(Connection dbConnection) throws SQLException {
