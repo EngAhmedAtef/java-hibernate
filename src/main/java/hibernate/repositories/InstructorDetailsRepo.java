@@ -12,7 +12,7 @@ public class InstructorDetailsRepo {
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.beginTransaction();
-            instructorDetails = session.createQuery("SELECT i FROM HibernateInstructorDetails i", InstructorDetails.class).list();
+            instructorDetails = session.createQuery("SELECT i FROM InstructorDetails i", InstructorDetails.class).list();
             session.getTransaction().commit();
         }
 

@@ -1,14 +1,13 @@
 package hibernate.repositories;
 
+import enums.CourseLevel;
 import hibernate.dtos.CourseNameStartDateStudentsDTO;
 import hibernate.dtos.InstructorCourseStudentsDTO;
 import hibernate.dtos.InstructorNameCoursesNamesDTO;
+import hibernate.dtos.IntermediateCourseStudentsDTO;
 import hibernate.entities.Course;
 import hibernate.entities.Instructor;
-import hibernate.mapper.CourseNameStartDateStudentsMapper;
-import hibernate.mapper.InstructorCourseStudentsMapper;
-import hibernate.mapper.InstructorMapper;
-import hibernate.mapper.InstructorNameCourseNameMapper;
+import hibernate.mapper.*;
 import hibernate.util.HibernateUtil;
 import jakarta.persistence.Query;
 import org.hibernate.Session;
@@ -27,6 +26,7 @@ public class JoinsRepo {
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             List<Instructor> instructors = session.createQuery("FROM Instructor").getResultList();
+
             if (!instructors.isEmpty()) {
                 InstructorNameCourseNameMapper mapper = new InstructorNameCourseNameMapper();
                 for (Instructor instructor : instructors)
@@ -42,6 +42,7 @@ public class JoinsRepo {
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             List<Instructor> instructors = session.createQuery("FROM Instructor").getResultList();
+
             if (!instructors.isEmpty()) {
                 InstructorCourseStudentsMapper mapper = new InstructorCourseStudentsMapper();
                 for (Instructor instructor : instructors)
@@ -57,6 +58,7 @@ public class JoinsRepo {
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             List<Course> courses = session.createQuery("FROM Course").getResultList();
+
             if (!courses.isEmpty()) {
                 CourseNameStartDateStudentsMapper mapper = new CourseNameStartDateStudentsMapper();
                 for (Course course : courses)
@@ -67,12 +69,22 @@ public class JoinsRepo {
         return result;
     }
 
-    public static void getIntermediateCoursesStudents(Connection dbConnection) throws SQLException {
-        PreparedStatement joinQuery = dbConnection.prepareStatement("SELECT name AS course_name, course_level, CONCAT(first_name, ' ', last_name) AS student_name FROM courses JOIN relations ON courses.id = relations.course_id JOIN students ON relations.student_id = students.id WHERE course_level = 'Intermediate' ORDER BY course_name");
-        ResultSet result = joinQuery.executeQuery();
+    public static List<IntermediateCourseStudentsDTO> getIntermediateCoursesStudents() {
+        List<IntermediateCourseStudentsDTO> result = new ArrayList<>();
 
-        while (result.next())
-            System.out.println("Course: " + result.getString("course_name") + " | Course Level: " + result.getString("course_level") + " | Student: " + result.getString("student_name"));
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            List<Course> courses = session.createQuery("FROM Course c WHERE CAST(c.courseLevel AS string) = :level")
+                    .setParameter("level", CourseLevel.Intermediate.name())
+                    .getResultList();
+
+            if (!courses.isEmpty()) {
+                IntermediateCourseStudentsMapper mapper = new IntermediateCourseStudentsMapper();
+                for (Course course : courses)
+                    result.add(mapper.mapToDTO(course));
+            }
+        }
+
+        return result;
     }
 
 }
