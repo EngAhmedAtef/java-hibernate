@@ -1,3 +1,4 @@
+import hibernate.dtos.CourseNameStartDateStudentsDTO;
 import hibernate.dtos.InstructorCourseStudentsDTO;
 import hibernate.dtos.InstructorNameCoursesNamesDTO;
 import hibernate.entities.Instructor;
@@ -27,7 +28,10 @@ public class TestDrive {
 //        List<InstructorNameCoursesNamesDTO> result = JoinsRepo.getInstructorsAndCourses();
 //        result.forEach(System.out::println);
 
-        List<InstructorCourseStudentsDTO> result = JoinsRepo.getInstructorsCoursesStudents();
+//        List<InstructorCourseStudentsDTO> result = JoinsRepo.getInstructorsCoursesStudents();
+//        result.forEach(System.out::println);
+
+        List<CourseNameStartDateStudentsDTO> result = JoinsRepo.getCourseNameStartDateStudents();
         result.forEach(System.out::println);
     }
 

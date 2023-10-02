@@ -1,9 +1,11 @@
 package hibernate.repositories;
 
+import hibernate.dtos.CourseNameStartDateStudentsDTO;
 import hibernate.dtos.InstructorCourseStudentsDTO;
 import hibernate.dtos.InstructorNameCoursesNamesDTO;
 import hibernate.entities.Course;
 import hibernate.entities.Instructor;
+import hibernate.mapper.CourseNameStartDateStudentsMapper;
 import hibernate.mapper.InstructorCourseStudentsMapper;
 import hibernate.mapper.InstructorMapper;
 import hibernate.mapper.InstructorNameCourseNameMapper;
@@ -50,25 +52,19 @@ public class JoinsRepo {
         return result;
     }
 
-    public static void getCourseNameStartDateStudents(Connection dbConnection) throws SQLException {
-        List<InstructorCourseStudentsDTO> result = new ArrayList<>();
+    public static List<CourseNameStartDateStudentsDTO> getCourseNameStartDateStudents() {
+        List<CourseNameStartDateStudentsDTO> result = new ArrayList<>();
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            List<Instructor> instructors = session.createQuery("FROM Instructor").getResultList();
-            if (!instructors.isEmpty()) {
-                InstructorCourseStudentsMapper mapper = new InstructorCourseStudentsMapper();
-                for (Instructor instructor : instructors)
-                    result.add(mapper.mapToDTO(instructor));
+            List<Course> courses = session.createQuery("FROM Course").getResultList();
+            if (!courses.isEmpty()) {
+                CourseNameStartDateStudentsMapper mapper = new CourseNameStartDateStudentsMapper();
+                for (Course course : courses)
+                    result.add(mapper.mapToDTO(course));
             }
         }
 
         return result;
-//
-//        PreparedStatement joinQuery = dbConnection.prepareStatement("SELECT name AS course_name, start_date, CONCAT(first_name, ' ', last_name) AS student_name FROM courses JOIN relations ON courses.id = relations.course_id JOIN students ON relations.student_id = students.id ORDER BY course_name");
-//        ResultSet result = joinQuery.executeQuery();
-//
-//        while (result.next())
-//            System.out.println("Course: " + result.getString("course_name") + " | Start Date: " + result.getTimestamp("start_date") + " | Student: " + result.getString("student_name"));
     }
 
     public static void getIntermediateCoursesStudents(Connection dbConnection) throws SQLException {
