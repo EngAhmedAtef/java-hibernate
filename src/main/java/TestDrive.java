@@ -1,3 +1,4 @@
+import hibernate.dtos.InstructorCourseStudentsDTO;
 import hibernate.dtos.InstructorNameCoursesNamesDTO;
 import hibernate.entities.Instructor;
 import hibernate.entities.InstructorDetails;
@@ -23,7 +24,10 @@ public class TestDrive {
     }
 
     private static void executeHibernateJoinsCRUDOperations() {
-        List<InstructorNameCoursesNamesDTO> result = JoinsRepo.getInstructorsAndCourses();
+//        List<InstructorNameCoursesNamesDTO> result = JoinsRepo.getInstructorsAndCourses();
+//        result.forEach(System.out::println);
+
+        List<InstructorCourseStudentsDTO> result = JoinsRepo.getInstructorsCoursesStudents();
         result.forEach(System.out::println);
     }
 
